@@ -2,14 +2,15 @@ import { memo, useState } from "react";
 import './style.scss';
 import { AiOutlineFacebook, AiOutlineInstagram,AiFillBell,
     AiOutlineLinkedin,AiOutlineUser, 
-AiFillFire, AiOutlineShoppingCart } from "react-icons/ai";
+AiFillFire, AiOutlineShoppingCart, 
+AiOutlineMenu, AiOutlinePhone} from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { formatter } from "utils/fomater";
 import { ROUTERS } from "utils/router";
 
 const Header = () => {
-
-    const [menus, setMenus] = useState([
+    const [isShowcategories, setShowCategories] = useState(true);
+    const [menus] = useState([
         {
             name: "Trang chủ",
             path: ROUTERS.USER.HOME,
@@ -147,6 +148,73 @@ const Header = () => {
                 </div>
 
             </div>
+            </div>
+            <div className="container">
+                <div className="row hero__categories__container">
+                    <div className="col-lg-3 hero__categories">
+                        <div className="hero__categories__all" onClick={() => setShowCategories(!isShowcategories)}>
+                            <AiOutlineMenu />
+                            Danh sách sản phẩm
+                            </div>
+    
+                        <ul className={isShowcategories ? "" : "hidden"} >
+                            <li>
+                                <Link to={"#"}>Tiểu Thuyết</Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}>Sách Khoa Học</Link>
+                            </li>
+                            <li>
+                                <Link to={"#"}>Truyện Tranh</Link>
+                            </li>
+                            <li>
+                                <Link  to={"#"}>Kỹ Năng Sống</Link >
+                            </li>
+                            <li>
+                                <Link  to={"#"}>Ngoại Ngữ</Link >
+                            </li>
+                            <li>
+                                <Link to={"#"}>Kinh Tế - Quản Trị</Link >
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div className="col-lg-9 hero__search__container">
+                        <div className="hero__search">
+                            <div className="hero__search__form">
+                                <form>
+                                    <input 
+                                    type="text" 
+                                    name ="" 
+                                    value=""
+                                    placeholder="Bạn đang tìm gì ?"/>
+                                    <button type="submit">Tìm kiếm</button> 
+                                </form>
+                            </div>
+                            <div className="hero__search__phone">
+                                <div className="hero__search__phone__icon">
+                                    <AiOutlinePhone />
+                                </div>
+                                <div className="hero__search__phone__text">
+                                    <p>0123.456.789</p>
+                                    <span>Hỗ trợ 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="hero__items">
+                            <div className="hero__text">
+                                <span>Sách mới</span>
+                                <h2>Tri thức <br />
+                                    là nguồn sống <br />
+                                    của con người</h2>
+                                <p>Miễn phí giao hàng tận nơi <AiFillFire/></p>
+                                <Link to="" className="primary-btn">
+                                Mua Ngay
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
