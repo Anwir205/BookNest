@@ -188,3 +188,41 @@
         width: 100%;
     }
 }
+
+@include Responsive($MEDIUM_DEVIDE) {
+    .container {
+        max-width: 990px;
+    }
+}
+
+@include Responsive($TABLET_DEVIDE) {
+    .container {
+        max-width: 750px;
+    }
+}
+@include Responsive($WIDE_MOBILE) {
+    .container {
+        max-width: 540px;
+    }
+    .featured .react-tabs ul.react-tabs__tab-list {
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        margin-bottom: 30px;
+
+        li {
+            margin-right: 0;
+            font-size: 16px;
+        }
+    }
+
+    .banner {
+        flex-direction: column;   // 2 banner xếp dọc
+    }
+}
+
+// màn cảm ứng: luôn hiện icon xem nhanh / giỏ hàng vì không có hover
+@media (hover: none) {
+    .featured .featured__item .featured__item__pic .featured__item__pic__hover {
+        bottom: 20px;
+    }
+}

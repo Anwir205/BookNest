@@ -1,7 +1,7 @@
 @use "sass:map";
 @import "theme";
 @import "responsive";
-
+@import "@fontsource/be-vietnam-pro";
 
 html,
 body{
@@ -9,7 +9,7 @@ body{
 }
 
 * {
-    font-family: Roboto;
+    font-family: "Be Vietnam Pro";
     padding: 0;
     margin: 0;
 }
@@ -61,13 +61,24 @@ body{
 }
 
 @include Responsive($MEDIUM_DEVIDE) {
+    .container {
+        max-width: 960px;
+    }
+    
     .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .col-xl-12 {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @include Responsive($SMALL_DEVIDE) {
+    .container {
+        max-width: 350px;
+    }
     .col-xs-12 {
         flex: 0 0 100%;
         max-width: 100%;
@@ -75,6 +86,9 @@ body{
 }
 
 @include Responsive($WIDE_MOBILE) {
+    .container {
+        max-width: 540px;
+    }
     .col-sm-6 {
         flex: 0 0 50%;
         max-width: 50%;
@@ -87,6 +101,9 @@ body{
 }
 
 @include Responsive($TABLET_DEVIDE) {
+    .container {
+        max-width: 720px;
+    }
     .col-md-6 {
         flex: 0 0 50%;
         max-width: 50%;

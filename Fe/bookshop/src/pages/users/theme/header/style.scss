@@ -1,5 +1,5 @@
 @use "sass:map";
-@import "style/pages/theme";
+@import "style/pages/all";
 
 $bannerImg: "/assets/users/images/hero/banner.png";
 
@@ -364,6 +364,250 @@ $bannerImg: "/assets/users/images/hero/banner.png";
                 text-decoration: none;
                 letter-spacing: 2px;
             }
+        }
+    }
+}
+
+.humberger__open,
+.humberger__menu__wrapper,
+.humberger__menu__overlay {
+    display: none;
+}
+
+@include Responsive($MEDIUM_DEVIDE) {
+    .hero__search__form {
+        width: 530px !important;
+    }
+
+}
+
+@media only screen and (max-width: 991px) {
+    .header__top,
+    .header__menu,
+    .header_cart
+    {
+        display: none;
+    }
+
+    .humberger__open {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+
+        svg {
+            font-size: 50px;
+            color: map.get($theme-colors, "normal-text");
+    }
+}
+
+    .humberger__menu__wrapper {
+        position: fixed;
+        width: 300px;
+        background: #ffffff;
+        height: 100%;
+        overflow-y: auto;
+        z-index: -9999;
+        padding: 30px;
+        padding-top: 50px;
+        opacity: 0;
+        display: block;
+        transition: all 0.6s;
+
+        &.show{
+            opacity: 1;
+            z-index: 9999;
+        }
+    }
+    .humberger__menu__overlay {
+        display: block; 
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 100;
+        visibility: hidden;
+        transition: all 0.2s;
+        
+        &.active {
+            visibility: visible !important;
+        }
+    }
+
+    .humberger__menu__cart{
+        display: flex;
+        margin-bottom: 25px;
+    }
+
+    .header__cart__price {
+        font-size: 14px;
+        color: #6f6f6f;
+
+        span {
+            color: map.get($theme-colors, "bold-text");
+            font-weight: 700;
+        }
+    }
+    .humberger__menu__cart ul {
+        list-style: none;
+        display: inline-block;
+        margin-right: 15px;
+
+        li:last-child {
+            margin-right: 0;
+        }
+        li {
+            position: relative;
+
+            a {
+                font-size: 18px;
+                color: map.get($theme-colors, "normal-text");
+
+                span {
+                    color: white;
+                    background: map.get($theme-colors, "main");
+                    height: 20px;
+                    left: 10px;
+                    top: -10px;
+                    border-radius: 40px;
+                    display: inline-block;
+                    text-align: center;
+                    line-height: 20px;
+                    font-size: 13px;
+                    position: absolute;
+                    padding: 0px 7px;
+                    font-weight: 500;
+              }
+            }
+        }
+    }
+    .humberger__menu__widget {
+        margin-bottom: 20px;
+
+        .header__top__right__auth {
+            display: block;
+            font-size: 14px;
+            a {
+                display: inline-flex;      
+                align-items: center;
+                gap: 5px;
+                color: map.get($theme-colors, "normal-text");
+                text-decoration: none;
+            }
+        }
+    }
+
+    .humberger__menu__nav {
+        margin-bottom: 20px;
+
+        ul {
+            list-style: none;
+
+            li {
+                padding: 8px 0;
+                border-bottom: 1px solid #e1e1e1;
+
+                a {
+                    color: map.get($theme-colors, "normal-text");
+                    font-size: 16px;
+                    font-weight: 500;
+                    text-decoration: none;
+
+                    svg {
+                        vertical-align: middle;
+                        margin-left: 5px ;
+                    }
+                }
+            }
+        }
+        .header__menu__dropdown {
+            display: none;
+            padding: 5px 0;
+
+            li {
+                margin-left: 10px;
+                display: block;
+                margin-right: 0;
+
+                &:last-child {
+                    border-bottom: unset;
+                }
+            }
+        }
+
+        .show__submenu {
+            display: block;
+        }
+    }
+
+    .humberger__menu__social {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 20px;
+
+         a{
+            font-size: 14px;
+            display: inline-block;
+            color: map.get($theme-colors, "normal-text");
+            margin-right: 25px;
+
+            svg {
+                font-size: 20px;
+            }
+         }
+    }
+    .humberger__menu__contact{
+        ul li {
+            list-style: none    ;
+            font-size: 14px;
+            display: inline-block;
+            color:  map.get($theme-colors, "normal-text");
+            margin-bottom: 10px;
+        }
+    }
+
+        .hero__search__container {
+        .hero__search {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+        }
+
+        // 1. form đang cố định 610px + float → tràn ngang trên điện thoại
+        .hero__search__form {
+            width: 100%;
+            float: none;
+            padding-left: 0;
+        }
+
+        // 3. banner: bỏ margin-left 15px (cộng width 100% là tràn), thu nhỏ chữ
+        .hero__items {
+            margin-left: 0;
+            height: auto;
+            min-height: 300px;
+            padding: 30px 0;
+
+            .hero__text {
+                padding-left: 25px;
+
+                span { font-size: 18px; letter-spacing: 2px; }
+                h2   { font-size: 22px; line-height: 34px; }
+            }
+        }
+    }
+
+    // 2. danh mục đang position: absolute → khi các cột xếp dọc nó đè lên ô tìm kiếm và banner
+    .hero__categories {
+        margin-bottom: 15px;
+
+        ul {
+            position: static;
+            width: 100%;
+
+            &.hidden { display: none; }
         }
     }
 }
