@@ -1,6 +1,6 @@
 import { memo } from "react";
 import Carousel from "react-multi-carousel";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import 'react-multi-carousel/lib/styles.css';
 import ig1Img from "assets/users/images/categories/ig1.jpg";
 import ig2Img from "assets/users/images/categories/ig2.png";
@@ -34,8 +34,9 @@ import banner2end from "assets/users/images/banner/b2.jpg";
 
 import "./style.scss";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
-import { formatter } from "utils/fomater";
+// import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
+// import { formatter } from "utils/fomater";
+import ProductCard from "component/ProductCard";
 
 
 const HomePage = () => {
@@ -301,28 +302,7 @@ const HomePage = () => {
             data[key].products.forEach((item, j) => {
                 tabPanel.push(
                     <div className="col-lg-3 col-md-6 col-sm-6" key={j}>
-                        <div className="featured__item">
-                            <div className="featured__item__pic"
-                            style={{
-                                backgroundImage:`url(${item.img})`,
-                            }}>
-                                <ul className="featured__item__pic__hover">
-                                    <li>
-                                        <AiOutlineEye/>
-                                    </li>
-                                    <li>
-                                        <AiOutlineShoppingCart/>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="featured__item__text">
-                                <h6>
-                                    <Link to="">{item.name}</Link>
-                                </h6>
-                                <h5>{formatter(item.price)}</h5>
-                            </div>
-
-                        </div>
+                        <ProductCard name={item.name} img={item.img} price={item.price}/>
                     </div>
                 );
             });

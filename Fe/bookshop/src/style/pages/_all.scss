@@ -2,6 +2,8 @@
 @import "theme";
 @import "responsive";
 @import "@fontsource/be-vietnam-pro";
+@import "@fontsource/be-vietnam-pro/500.css";
+@import "@fontsource/be-vietnam-pro/700.css";
 
 html,
 body{
@@ -38,6 +40,11 @@ body{
     max-width: 25%;
 }
 
+.col-lg-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
 .col-lg-6 {
     flex: 0 0 50%;
     max-width: 50%;
@@ -60,29 +67,54 @@ body{
     height: 100;
 }
 
+input, textarea {
+    box-sizing: border-box; 
+    width: 100%;
+    height: 35px;
+    border: 1px solid #ebebeb;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #b2b2b2;
+    border-radius: 3px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+textarea{
+    padding-top: 10px;
+}
+
 @include Responsive($MEDIUM_DEVIDE) {
     .container {
         max-width: 960px;
     }
     
-    .col-lg-3 {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-    .col-xl-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+    // .col-lg-3 {
+    //     flex: 0 0 25%;
+    //     max-width: 25%;
+    // }
+    // .col-xl-12 {
+    //     flex: 0 0 100%;
+    //     max-width: 100%;
+    // }
 }
 
-@include Responsive($SMALL_DEVIDE) {
+
+@include Responsive($TABLET_DEVIDE) {
     .container {
-        max-width: 350px;
+        max-width: 720px;
     }
-    .col-xs-12 {
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .col-md-12 {
         flex: 0 0 100%;
         max-width: 100%;
     }
+
 }
 
 @include Responsive($WIDE_MOBILE) {
@@ -100,19 +132,14 @@ body{
     }
 }
 
-@include Responsive($TABLET_DEVIDE) {
+@include Responsive($SMALL_DEVIDE) {
     .container {
-        max-width: 720px;
+        max-width: 350px;
     }
-    .col-md-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-    .col-md-12 {
+    .col-xs-12 {
         flex: 0 0 100%;
         max-width: 100%;
     }
-
 }
 
 // may hien tai la desktop
@@ -126,4 +153,5 @@ body{
         flex: 0 0 50%;
         max-width: 50%;
     }
+    .col-xl-12 { flex: 0 0 100%; max-width: 100%; }
 }

@@ -1,5 +1,6 @@
 @use "sass:map";
-@import "style/pages/all";
+@import "style/pages/theme";
+@import "style/pages/responsive";
 
 $bannerImg: "/assets/users/images/hero/banner.png";
 
@@ -227,6 +228,7 @@ $bannerImg: "/assets/users/images/hero/banner.png";
 
         &.hidden {
             opacity: 0;
+            visibility: hidden;
         }
     }
 }
@@ -234,43 +236,41 @@ $bannerImg: "/assets/users/images/hero/banner.png";
 .hero__search__container {
 
     .hero__search__form {
-        width: 610px;
-        height: 50px;
-        float: left;
-        padding-left: 15px;
+    width: 610px;
+    height: 50px;
+    float: left;
+    padding-left: 15px;
 
-         form {
+    form {
         display: flex;
-        align-items: center;
+        align-items: stretch;
     }
 
-        input {
-        border: none;
+    input {
+        flex: 1;
+        min-width: 0;
+        width: auto;
         height: 48px;
         font-size: 16px;
         color: #b2b2b2;
         padding-left: 20px;
         border: 1px solid #bebebe;
-        width: 70%;
-        
-        :focus {
-            outline: none;
-            border: none;
-        }
     }
 
     button {
+        flex-shrink: 0;
+        height: 48px;
+        padding: 0 25px;
+        white-space: nowrap;
         font-size: 14px;
         color: #ffffff;
         font-weight: 800;
         text-transform: uppercase;
-        display: inline-block;
-        padding: 16px 30px 17px;
         background: map.get($theme-colors, "main");
         border: none;
-        height: 100%;
+        cursor: pointer;
     }
-    }
+}
 
     .hero__search__phone{
         display: flex;

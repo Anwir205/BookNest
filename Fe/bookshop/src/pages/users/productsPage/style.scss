@@ -1,0 +1,103 @@
+@use "sass:map";
+@import "style/pages/theme";
+
+.products-page {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .slidebar {
+        padding-right: 20px;
+
+        .slidebar__item {
+            margin-bottom: 20px;
+
+            h2 {
+                position: relative;
+                color: rgb(28, 28, 28);
+                font-weight: 100;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: map.get($theme-colors, "main");
+                }
+            }
+
+            input {
+                box-sizing: border-box;   // phần còn lại đã có trong rule input chung ở _all.scss
+            }
+
+            .price-range-wrap {
+                display: flex;
+                flex-direction: column;
+                row-gap: 10px;
+            }
+
+            .tags {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+
+                .tag {
+                    font-size: 12px;
+                    color: #6f6f6f;
+                    display: inline-block;
+                    padding: 8px 25px 6px;
+                    cursor: pointer;
+                    background: #f5f5f5;
+
+                    &:hover,
+                    &.active {            // đổi từ :active sang .active
+                        background: map.get($theme-colors, "main");
+                        color: #ffffff;
+                    }
+                }
+            }
+
+            .categories-list {
+                padding: 0;
+
+                li {
+                    background: #f5f5f5;
+                    border-radius: 8px;
+                    margin-bottom: 8px;
+                    padding: 4px 15px;
+                    width: 75%;
+
+                    &:hover { background: #e9e9e9; }
+                }
+            }
+
+            ul li {
+                list-style: none;
+
+                a {
+                    text-decoration: none;
+                    line-height: 30px;
+                    color: map.get($theme-colors, "normal-text");
+
+                    &:hover { color: map.get($theme-colors, "main"); }
+                }
+            }
+        }
+
+        // màn <= 991px: sidebar xếp trên danh sách nên bỏ lề phải
+        @media only screen and (max-width: 991px) {
+            padding-right: 0;
+            margin-bottom: 20px;
+        }
+
+        // tablet: chia sidebar thành 2 cột cho đỡ dài
+        @media only screen and (min-width: 576px) and (max-width: 991px) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 20px;
+        }
+    }
+}
