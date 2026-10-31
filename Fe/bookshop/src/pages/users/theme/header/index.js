@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import './style.scss';
 
 import { AiOutlineFacebook, AiOutlineInstagram,AiFillBell,
@@ -10,13 +10,24 @@ AiOutlineUpCircle} from "react-icons/ai";
 
 import { MdEmail} from "react-icons/md";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import { formatter } from "utils/fomater";
 import { ROUTERS } from "utils/router";
 
+export const categories = [
+        "Tiểu Thuyết",
+        "Sách Khoa Học",
+        "Truyện Tranh",
+        "Kỹ Năng Sống",
+       "Ngoại Ngữ",
+    ];
+
 const Header = () => {
-    const [isShowcategories, setShowCategories] = useState(true);
+    const location = useLocation();
+    const isHome = location.pathname === "/";  
     const [isShowHumberger, setShowHumberger] = useState(false);
+    const [isShowcategories, setShowCategories] = useState(isHome);
+    const [keyword, setKeyword] = useState("");   
     const [menus, setMenus] = useState([
         {
             name: "Trang chủ",
@@ -53,7 +64,13 @@ const Header = () => {
             name: "Liên Hệ" ,
             path: "",
         },
-    ])
+    ]);
+    
+
+    useEffect(() => {
+        setShowCategories(isHome);
+
+    }, [isHome]);
 
     return (
         <>
@@ -204,7 +221,7 @@ const Header = () => {
                                         menu.child && (
                                             <ul className="header_menu_dropdown">
                                                 {menu.child.map((childItem, childKey) => (
-                                                    <li key={`$(menuKey) - $(childKey)`}>
+                                                    <li key={`${menuKey}-${childKey}`}>
                                                     <Link to={childItem.path}>{childItem.name}</Link>
                                                 </li>
                                                 ))}
@@ -253,24 +270,13 @@ const Header = () => {
                             </div>
     
                         <ul className={isShowcategories ? "" : "hidden"} >
-                            <li>
-                                <Link to={"#"}>Tiểu Thuyết</Link>
-                            </li>
-                            <li>
-                                <Link to={"#"}>Sách Khoa Học</Link>
-                            </li>
-                            <li>
-                                <Link to={"#"}>Truyện Tranh</Link>
-                            </li>
-                            <li>
-                                <Link  to={"#"}>Kỹ Năng Sống</Link >
-                            </li>
-                            <li>
-                                <Link  to={"#"}>Ngoại Ngữ</Link >
-                            </li>
-                            <li>
-                                <Link to={"#"}>Kinh Tế - Quản Trị</Link >
-                            </li>
+                            {
+                                categories.map((category,key) => (
+                                    <li key={key}>
+                                        <Link to={ROUTERS.USER.PRODUCTS}>{category}</Link >
+                                    </li>
+                                ))
+                            }
                         </ul>
                         
                     </div>
@@ -278,11 +284,12 @@ const Header = () => {
                         <div className="hero__search">
                             <div className="hero__search__form">
                                 <form>
-                                    <input 
-                                    type="text" 
-                                    name ="" 
-                                    value=""
-                                    placeholder="Bạn đang tìm gì ?"/>
+                                    <input
+                                            type="text"
+                                            value={keyword}
+                                            onChange={(e) => setKeyword(e.target.value)}
+                                            placeholder="Bạn đang tìm gì ?"
+                                        />
                                     <button type="submit">Tìm kiếm</button> 
                                 </form>
                             </div>
@@ -296,7 +303,8 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="hero__items">
+                        {
+                            isHome && (<div className="hero__items">
                             <div className="hero__text">
                                 <span>Sách mới</span>
                                 <h2>Tri thức <br />
@@ -308,6 +316,9 @@ const Header = () => {
                                 </Link>
                             </div>
                         </div>
+                            )
+                        }
+                        
                     </div>
                 </div>
             </div>
