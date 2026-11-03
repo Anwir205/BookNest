@@ -8,7 +8,8 @@ import './style.scss';
 
 const ProductCard = ({img, name, price}) => {
     return (
-        <>            <div className="featured__item">
+        <>            
+        <div className="featured__item">
                 <div className="featured__item__pic"
                 style={{
                                 backgroundImage:`url(${img})`,
