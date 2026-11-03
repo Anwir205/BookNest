@@ -1,103 +1,142 @@
 @use "sass:map";
 @import "style/pages/theme";
 
-.products-page {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.product__detail {
+    padding-top: 15px;
+    padding-bottom: 15px;      // để ảnh không dính footer, bỏ được nếu không cần
+}
 
-    .slidebar {
-        padding-right: 20px;
+.product__detail__pic {
+    display: flex;
+     align-items: flex-start;
+    column-gap: 10px;
 
-        .slidebar__item {
-            margin-bottom: 20px;
+    img {
+        flex: 0 0 65%;
+        // object-fit: cover;
+        min-width: 0; 
+        height: auto;
+    }
+    .main {
+        flex: 1;
+        min-width: 0;
+        display: grid;
+        gap: 10px;
+        flex-direction: column;
+        
 
-            h2 {
-                position: relative;
-                color: rgb(28, 28, 28);
-                font-weight: 100;
-                padding-bottom: 10px;
-                margin-bottom: 10px;
+        img {
+            width: 60%;
+            height: auto;      
+            cursor: pointer;
+        }
+    }
+}
 
-                &::after {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    width: 100%;
-                    height: 3px;
-                    background: map.get($theme-colors, "main");
-                }
-            }
+.product__detail__text {
+    h2 {
+        color: #252525;
+        font-weight: 700;
+    }
+    .seen-icon {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        line-height: 30px;
+        column-gap: 5px;
+    }
 
-            input {
-                box-sizing: border-box;   // phần còn lại đã có trong rule input chung ở _all.scss
-            }
+    p {
+        margin: 10px 0;
+        line-height: 25px;
+    }
 
-            .price-range-wrap {
-                display: flex;
-                flex-direction: column;
-                row-gap: 10px;
-            }
+     ul {
+        list-style: none;
+        margin-top: 15px;
 
-            .tags {
-                display: flex;
-                gap: 10px;
-                flex-wrap: wrap;
+        li { line-height: 30px; }
 
-                .tag {
-                    font-size: 12px;
-                    color: #6f6f6f;
-                    display: inline-block;
-                    padding: 8px 25px 6px;
-                    cursor: pointer;
-                    background: #f5f5f5;
+        span {
+            
+            column-gap: 10px;
+            align-items: center;
 
-                    &:hover,
-                    &.active {            // đổi từ :active sang .active
-                        background: map.get($theme-colors, "main");
-                        color: #ffffff;
-                    }
-                }
-            }
-
-            .categories-list {
-                padding: 0;
-
-                li {
-                    background: #f5f5f5;
-                    border-radius: 8px;
-                    margin-bottom: 8px;
-                    padding: 4px 15px;
-                    width: 75%;
-
-                    &:hover { background: #e9e9e9; }
-                }
-            }
-
-            ul li {
-                list-style: none;
-
-                a {
-                    text-decoration: none;
-                    line-height: 30px;
-                    color: map.get($theme-colors, "normal-text");
-
-                    &:hover { color: map.get($theme-colors, "main"); }
-                }
+            svg {
+                padding: 0 4px;
+                font-size: 20px;
+                cursor: pointer;
             }
         }
+    }
+}
 
-        // màn <= 991px: sidebar xếp trên danh sách nên bỏ lề phải
-        @media only screen and (max-width: 991px) {
-            padding-right: 0;
-            margin-bottom: 20px;
+.product__detail__tab {
+    margin-top: 30px;
+
+     h4 {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;                 
+        margin-bottom: 15px;
+
+        &::before,
+        &::after {
+            content: "";
+            flex: 1;              
+            height: 2px;
+            background: map.get($theme-colors, "main");
+        }
+    }
+
+    p {
+        line-height: 26px;
+        margin-bottom: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+
+        td {
+            padding: 10px 15px;
+            border: 1px solid #ebebeb;
+
+            &:first-child {
+                width: 30%;
+                font-weight: 700;
+                background: #f5f5f5;
+            }
+        }
+    }
+}
+
+.section-title {
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 991px) {
+    .product__detail__text {
+        margin-top: 20px;       // khi hai cột xếp dọc, chừa khoảng cách với ảnh
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .product__detail__pic {
+        flex-direction: column;
+
+        > img {
+            flex: none;
+            width: 100%;
         }
 
-        // tablet: chia sidebar thành 2 cột cho đỡ dài
-        @media only screen and (min-width: 576px) and (max-width: 991px) {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 20px;
+        .main {
+            flex: none;
+            grid-template-columns: repeat(3, 1fr);   // 3 ảnh nhỏ nằm một hàng
+
+            img { width: 100%; }
         }
     }
 }
