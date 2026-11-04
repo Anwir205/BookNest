@@ -10,7 +10,7 @@ AiOutlineUpCircle} from "react-icons/ai";
 
 import { MdEmail} from "react-icons/md";
 
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import { formatter } from "utils/fomater";
 import { ROUTERS } from "utils/router";
 
@@ -23,8 +23,21 @@ export const categories = [
     ];
 
 const Header = () => {
+    const navigate = useNavigate();
     const location = useLocation();
-    const isHome = location.pathname === "/";  
+    const isHome = location.pathname === "/"; 
+    
+    const isMenuActive = (path) => {
+    if (!path) return false;
+
+    if (path === ROUTERS.USER.HOME) {
+        return location.pathname === path;
+    }
+
+    return location.pathname === path ||
+           location.pathname.startsWith(`${path}/`);
+};
+
     const [isShowHumberger, setShowHumberger] = useState(false);
     const [isShowcategories, setShowCategories] = useState(isHome);
     const [keyword, setKeyword] = useState("");   
@@ -78,7 +91,7 @@ const Header = () => {
             onClick={() => setShowHumberger(false)} />
 
         <div className={`humberger__menu__wrapper ${isShowHumberger ? "show" : ""}`}>
-        <div className="header__logo">   {/* đang viết <diV>, sửa thành div */}
+        <div className="header__logo">  
         <h1>LovelyShop</h1>
         </div>
             <div className="humberger__menu__cart">
@@ -191,11 +204,9 @@ const Header = () => {
                                 <AiOutlineLinkedin />
                                 </Link>
                             </li>
-                            <li>
-                                <Link to={""}>
+                            <li onClick={() => navigate(ROUTERS.ADMIN.LOGIN)}>
                                 <AiOutlineUser />
-                                </Link>
-                                <span>Login</span>
+                                <span>Đăng nhập</span>
                             </li>
                         </ul>
                     </div>
@@ -213,43 +224,42 @@ const Header = () => {
                     <div className="header__menu">
                         <ul>        
                             {menus?.map((menu, menuKey) => (
-                                <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
-                                    <Link to={menu?.path}>
-                                    {menu?.name}
-                                    </Link>
-                                    {
-                                        menu.child && (
-                                            <ul className="header_menu_dropdown">
-                                                {menu.child.map((childItem, childKey) => (
-                                                    <li key={`${menuKey}-${childKey}`}>
-                                                    <Link to={childItem.path}>{childItem.name}</Link>
+                            <li
+                                key={menuKey}
+                                className={isMenuActive(menu.path) ? "active" : ""}
+                            >
+                            <Link to={menu.path}>
+                                {menu.name}
+                            </Link>
+
+                                {
+                                    menu.child && (
+                                        <ul className="header_menu_dropdown">
+                                            {menu.child.map((childItem, childKey) => (
+                                                <li key={`${menuKey}-${childKey}`}>
+                                                    <Link to={childItem.path}>
+                                                        {childItem.name}
+                                                    </Link>
                                                 </li>
-                                                ))}
-                                            </ul>
-                                        )
-                                    }
-                                </li>
-                            ))}
+                                            ))}
+                                        </ul>
+                                    )
+                                }
+                            </li>
+                        ))}
                             </ul>
-                            {/* <li>
-                                <Link to="">Sách</Link>
-                                <ul>
-                                    <li>Sách bán chạy</li>
-                                    <li>Sách bán chạy</li>
-                                </ul>
-                            </li> */}
                         
                     </div>
                 </div>
                 <div className=" col-lg-3 ">
                     <div className="header_cart">  
                         <div className="header_cart_prize">
-                            <span>{formatter(100000)}</span>
+                            <span>{formatter(200000)}</span>
                         </div>
                         <ul>    
                             <li>
-                                <Link to="#">
-                                    <AiOutlineShoppingCart /> <span>5</span>
+                                <Link to={ROUTERS.USER.SHOPPING_CART}>
+                                    <AiOutlineShoppingCart /> <span>2</span>
                                 </Link>
                             </li>
                         </ul>
