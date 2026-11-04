@@ -1,13 +1,19 @@
 // import { Component } from "react";
 import HomePage from "./pages/users/homePage";
-import { Routes, Route } from "react-router-dom";
-import { ROUTERS } from "./utils/router";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { ROUTERS,ADMIN__PATH } from "./utils/router";
 import MasterLayout from "./pages/users/theme/masterLayout";
 import ProfilePage from "./pages/users/ProfilePage";
 import ProductsPage from "pages/users/productsPage";
 import ProductDetailPage from "pages/users/productDetailPage";
+import ShoppingCartPage from "pages/users/ShoppingCartPage";
+import CheckoutPage from "pages/users/checkoutPage";
+import LoginPage from "pages/admin/loginPage";
+import MasterAdLayout from "pages/admin/theme/masterAdLayout";
+import OrderAdPage from "pages/admin/orderPage";
 
-const rederUserRouter = () => {
+
+const renderUserRouter = () => {
     const userRouters = [
         {
             path:ROUTERS.USER.HOME,
@@ -24,9 +30,18 @@ const rederUserRouter = () => {
         {
             path:ROUTERS.USER.PRODUCT,
             component: <ProductDetailPage />
+        },
+        {
+            path:ROUTERS.USER.SHOPPING_CART,
+            component: <ShoppingCartPage />
+        },
+        {
+            path:ROUTERS.USER.CHECKOUT,
+            component: <CheckoutPage />
         }
       
     ]
+
     return (
         <MasterLayout>
         <Routes>
@@ -40,8 +55,36 @@ const rederUserRouter = () => {
     )
 }
 
+const renderAdminRouter = () => {
+
+    const adminRouters = [
+        {
+            path:ROUTERS.ADMIN.LOGIN,
+            component: <LoginPage />
+        },
+        {
+            path:ROUTERS.ADMIN.ORDERS,
+            component: <OrderAdPage />
+        },
+    ]
+    return (
+        <MasterAdLayout>
+        <Routes>
+            {
+                adminRouters.map((item, key) => (
+                    <Route key={key} path={item.path} element={item.component} />
+                ))
+            }
+        </Routes>
+        </MasterAdLayout>
+    )
+}
+
 const RouterCustom = () => {
-    return rederUserRouter();
+    const location = useLocation();
+    const isAdminRouters = location.pathname.startsWith(ADMIN__PATH);
+    
+    return isAdminRouters ? renderAdminRouter() : renderUserRouter();
 };
 
 export default RouterCustom;

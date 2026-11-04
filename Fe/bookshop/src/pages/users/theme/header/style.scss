@@ -79,6 +79,7 @@ $bannerImg: "/assets/users/images/hero/banner.png";
 
 .header__menu {
     padding: 24px 0;
+
     ul {
         display: flex;
         justify-content: space-between;
@@ -86,13 +87,14 @@ $bannerImg: "/assets/users/images/hero/banner.png";
         li {
             list-style: none;
             position: relative;
+
             a {
                 text-decoration: none;
                 font-size: 18px;
                 color: map.get($theme-colors, "normal-text");
                 font-weight: bold;
                 letter-spacing: 2px;
-                transition: all, 0.3s;
+                transition: color 0.3s ease;
                 padding: 5px 0;
                 display: block;
             }
@@ -103,6 +105,7 @@ $bannerImg: "/assets/users/images/hero/banner.png";
             visibility: visible;
         }
 
+        // Menu đang được chọn
         .active a {
             color: map.get($theme-colors, "main");
         }
@@ -114,7 +117,7 @@ $bannerImg: "/assets/users/images/hero/banner.png";
             width: 180px;
             z-index: 9;
             padding: 5px 0;
-            transition: all, 0.3s;
+            transition: all 0.3s ease;
             opacity: 0;
             visibility: hidden;
 
@@ -127,7 +130,7 @@ $bannerImg: "/assets/users/images/hero/banner.png";
                     font-size: 14px;
                 }
 
-                :hover {
+                &:hover a {
                     color: map.get($theme-colors, "main");
                 }
             }

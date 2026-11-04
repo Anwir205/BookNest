@@ -1,0 +1,97 @@
+@use "sass:map";
+@import "style/pages/theme";
+
+.checkout__input {
+    margin-top: 20px;
+
+    input,
+    textarea {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    textarea {
+        height: auto;          // rule chung đang đặt height: 35px nên rows={15} bị vô hiệu
+        resize: vertical;
+    }
+
+    .required {
+        color: red;
+    }
+}
+
+.checkout__input__group {
+    display: flex;
+    column-gap: 20px;
+
+    .checkout__input {
+        flex: 1;               // chia đều 2 ô, không cần width: 96% nữa
+        min-width: 0;
+    }
+}
+
+.checkout__order {
+    background: #f5f5f5;
+    padding: 30px 40px 40px;
+    margin: 30px 0 30px 50px;
+
+    > h3 {                     // chỉ tiêu đề "Đơn hàng", không dính h3 "Tổng đơn" bên trong li
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    ul {
+        li {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            line-height: 26px;     // thay cho line-height: 50px, tên dài xuống dòng không bị giãn
+
+            span { flex: 1; min-width: 0; }
+            b    { white-space: nowrap; }   // giá không bị bẻ dòng
+        }
+
+        .checkout__order__subtotal {
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+
+            b {
+                color: map.get($theme-colors, "discription");
+            }
+        }
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+// tablet + điện thoại: hai cột đã xếp dọc (col-md-12)
+@media only screen and (max-width: 991px) {
+    .checkout__order {
+        margin-left: 0;        // bỏ lề trái 50px cho thẳng hàng với form
+    }
+}
+
+// điện thoại
+@media only screen and (max-width: 575px) {
+    .checkout__input__group {
+        flex-direction: column;   // điện thoại và email xếp dọc
+        column-gap: 0;
+    }
+
+    .checkout__input textarea {
+        height: 150px;
+    }
+
+    .checkout__order {
+        padding: 20px;
+
+        ul li { font-size: 14px; }
+    }
+}
